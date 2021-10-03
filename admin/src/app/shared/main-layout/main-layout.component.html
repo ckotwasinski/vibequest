@@ -1,0 +1,45 @@
+<header class="header">
+    <div class="maxContainer">
+        <div class="align-center align-between p10">
+            <div class="logo">
+                <a routerLink="/">
+                    <img src="assets/images/logo.svg" alt="">
+                </a>
+            </div>
+            <div class="rightLogo">
+                <img src="assets/images/vims-logo.png" alt="">
+            </div>
+        </div>
+    </div>
+</header>
+<header class="header stickyHeaer">
+    <nav class="navBar">
+        <div class="maxContainer">
+            <div class="menu">
+                <ul>
+                    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+                    <li><a routerLink="/about-us" fragment="mission" [class.active]="isSectionActive('mission')">Mission</a></li>
+                    <li><a routerLink="/about-us" fragment="about-us" [class.active]="isSectionActive('about-us')">About Us</a></li>
+                    <li><a routerLink="/about-us" fragment="contact-us" [class.active]="isSectionActive('contact-us')">Contact us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<router-outlet></router-outlet>
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="footerContent">
+            <div class="footerLogo">
+                <img src="assets/images/william-mary-logo.png" alt="">
+            </div>
+            <div class="text-center text-white">
+                Virginia Institute of Marine Science  Gloucester Point, VA<br>
+                All Rights Reserved © 2020
+            </div>
+        </div>
+    </div>
+</footer>

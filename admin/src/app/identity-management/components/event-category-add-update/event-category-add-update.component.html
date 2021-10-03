@@ -1,0 +1,85 @@
+<div class="spinner-div" *ngIf="loading" >
+    <mat-progress-spinner mode="indeterminate" *ngIf="loading" class="spinner-div">
+    </mat-progress-spinner>
+  </div>
+<div class="Main_Div" *ngIf="isVisible">
+    <div class="Title_Div align-center justify-space-between pb30">
+        <h3 class="m0">{{ (selectedEventCategory.id ? 'Edit' : 'Add New')}} </h3>
+        <div class="Right_Side-Div">
+
+        </div>
+    </div>
+    <div class="Form_Div">
+        <div *ngIf="isVisible">
+            <form [formGroup]="eventCategoryAddUpdateForm" (ngSubmit)="saveRecord()">
+                <div class="commonRowBox flex-wrap align-center">
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="name">Name<span class="danger">*</span></label>
+                            <div class="formElement">
+                                <input type="text" id="name" class="form-control" formControlName="name"
+                                    maxlength="100" />
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.name">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && eventCategoryAddUpdateForm.get('name').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="code">Code<span class="danger">*</span></label>
+                            <div class="formElement">
+                                <input type="text" id="code"   [readonly]="selectedEventCategory.id ? true : false" class="form-control" formControlName="code" />
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.code">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && eventCategoryAddUpdateForm.get('code').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                   
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="code">Photo</label>
+                            <div class="formElement">
+                                <div class="UploadFile_div">
+                                    <div class="UploadFile_Box" *ngIf="isEventPicControlVisible">
+                                        <div class="btn">Choose File</div>
+                                    </div>
+                                    <input class="chose-file" type="file" accept="image/*"
+                                        formControlName="photo" (change)="onSelectFile($event)"
+                                        *ngIf="isEventPicControlVisible" />
+                                    <img [src]="this.selectedEventCategory.thumbnailImagePath" alt="" width="50" height="50"
+                                        *ngIf="!isEventPicControlVisible" />
+                                    <span class="actionIcon deleteIcon cursor" (click)="deleteCategoryPic()"
+                                        *ngIf="!isEventPicControlVisible">
+                                        <mat-icon aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+            </form>
+        </div>
+    </div>
+   
+    <mat-dialog-actions align="end" *ngIf="isVisible">
+        <button mat-button mat-dialog-close class="btn btn-light">Cancel</button>
+        <button mat-button type="button" class="btn" iconClass="fa fa-check" (click)="saveRecord()">
+            Save
+        </button>
+    </mat-dialog-actions>
+</div>

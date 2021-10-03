@@ -1,0 +1,66 @@
+
+  <div class="Main_Div">
+    <div class="Title_Div align-center justify-space-between pb30">
+        <h3 class="m0">Event Category</h3>
+        <div class="Right_Side-Div align-center">
+          <div class="search-btn">
+            <mat-form-field>
+              
+              <input matInput (keyup)="applyFilter($event)" #input placeholder="search">
+              <div class="search-icon">
+                <mat-icon aria-hidden="false" aria-label="Example search icon">search</mat-icon>
+              </div>
+            </mat-form-field>
+          </div>
+          <a id="create" class="btn ml15 cursor" (click)="openDialog('')" *hasPermission="[policies.eventCategoryCreate]">
+            <mat-icon aria-hidden="false" aria-label="Example add icon">add</mat-icon>
+            Add new</a>
+        </div>
+    </div>
+    <div class="Table_Div">
+      <div class="auto-div">
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+            <ng-container matColumnDef="name" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="Name" style= "width:30%"> Name </th>
+              <td  style= "width:5%" mat-cell *matCellDef="let row"> {{row.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="Code" style= "width:40%"> Code </th>
+              <td style= "width:30%" mat-cell *matCellDef="let row"> {{row.code}} </td>
+            </ng-container>
+            <ng-container matColumnDef="photo">
+              <th mat-header-cell *matHeaderCellDef style= "width:10%"> Photo </th>
+              <td style= "width:20%" mat-cell *matCellDef="let row"> <img style="height: 50px;width: 50px;" src="{{imagePath}}{{row.photo}}"/> </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef style= "width:40%" class="pl15"> <span *hasPermission="[policies.eventCategoryEdit, policies.eventCategoryDelete]; op 'OR'">Action</span> </th>
+              <td style= "width:40%" mat-cell *matCellDef="let row"> 
+               <a id="Edit" (click)="openDialog(row.id)" class="cursor" *hasPermission="[policies.eventCategoryEdit]">
+                <mat-icon id="Edit" aria-hidden="false" aria-label="Example edit icon">edit</mat-icon>
+              </a>
+            <a id="Delete" (click)="deleteRecord(row.id)" class="cursor" *hasPermission="[policies.eventCategoryDelete]">
+              <mat-icon id="Delete" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+            </a> 
+            </td>
+              
+            </ng-container>
+      
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> 
+          </table>  
+          <div class="spinner-div" *ngIf="loading" >
+            <mat-progress-spinner mode="indeterminate" *ngIf="loading" class="spinner-div">
+            </mat-progress-spinner>
+          </div>
+         
+        </div>
+      </div>
+      <mat-paginator 
+      [length]="this.totalCount"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      ></mat-paginator>
+    </div>
+</div>

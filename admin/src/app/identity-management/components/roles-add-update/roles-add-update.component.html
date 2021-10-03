@@ -1,0 +1,59 @@
+<div class="spinner-div" *ngIf="loading" >
+    <mat-progress-spinner mode="indeterminate" *ngIf="loading" class="spinner-div">
+    </mat-progress-spinner>
+  </div>
+
+<div class="Main_Div">
+    <div class="Title_Div align-center justify-space-between pb30">
+        <h3 class="m0">{{ (selectedRole.id ? 'Edit' : 'Add New')}}</h3>
+        <div class="Right_Side-Div">
+        </div>
+    </div>
+    <div class="Form_Div">
+        <div>
+            <form [formGroup]="rolesAddUpdateForm" (ngSubmit)="saveRecord()">
+                <div class="commonRowBox flex-wrap align-center">
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="name">Name<span class="danger"> * </span></label>
+                            <div class="formElement">
+                                <input type="text" id="name" class="form-control" formControlName="name" maxlength="50"/>
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.name">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && rolesAddUpdateForm.get('name').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="code">Code<span class="danger">*</span></label>
+                            <div class="formElement">
+                                <input type="text" id="code" class="form-control" formControlName="code" maxlength="50" />
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.code">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && rolesAddUpdateForm.get('code').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close class="btn btn-light">Cancel</button>
+        <button mat-button type="button" class="btn" iconClass="fa fa-check" (click)="saveRecord()">
+            Save
+        </button>
+    </mat-dialog-actions>
+   </div>
+

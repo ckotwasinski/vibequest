@@ -1,0 +1,80 @@
+<mat-dialog-content>
+  <div class="Main_Div">
+    <div class="Title_Div align-center justify-space-between pb30">
+      <h3 class="m0">{{this.isErrorLog ? 'Error Log':'Activity Log'}}</h3>
+    </div>
+    <div class="Table_Div">
+      <div class="auto-div">
+        <table class="table-td">
+          <tr>
+            <th>User Name</th>
+            <td>{{ this.logData[0].userName }}</td>
+          </tr>
+          <tr>
+            <th>Execution Time</th>
+            <td>{{ this.logData[0].executionTime | date:'medium' }}</td>
+          </tr>
+          <tr>
+            <th>Client IP Address</th>
+            <td>{{ this.logData[0].clientIpAddress }}</td>
+          </tr>
+          <tr>
+            <th>Method</th>
+            <td>{{ this.logData[0].httpMethod }}</td>
+          </tr>
+          <tr>
+            <th>URL</th>
+            <td>{{ this.logData[0].url }}</td>
+          </tr>
+          <tr>
+            <th>Status Code</th>
+            <td>{{ this.logData[0].httpStatusCode }}</td>
+          </tr>
+        </table>
+        <br>
+        <br>
+
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="executionDuration">
+              <th mat-header-cell *matHeaderCellDef style="width:20%"> Execution Duration</th>
+              <td style="width:50%" mat-cell *matCellDef="let row"> {{row.executionDuration}} </td>
+            </ng-container>
+            <ng-container matColumnDef="browserInfo">
+              <th mat-header-cell *matHeaderCellDef style="width:50%"> Browser Info</th>
+              <td style="width:50%" mat-cell *matCellDef="let row"> {{row.browserInfo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="exception" *ngIf="isErrorLog">
+              <th mat-header-cell *matHeaderCellDef style="width:50%"> Exception</th>
+              <td style="width:50%" mat-cell *matCellDef="let row"> {{this.logData[0].exception}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="parameters">
+              <th mat-header-cell *matHeaderCellDef style="width:50%"> Parameters</th>
+              <td style="width:50%" mat-cell *matCellDef="let row"> {{row.parameters}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="comments">
+              <th mat-header-cell *matHeaderCellDef style="width:50%"> Comments</th>
+              <td style="width:50%" mat-cell *matCellDef="let row"> {{row.comments}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <div class="spinner-div" *ngIf="loading">
+            <mat-progress-spinner mode="indeterminate" *ngIf="loading" class="spinner-div">
+            </mat-progress-spinner>
+          </div>
+        </div>
+      </div>
+      <!-- <mat-paginator [length]="this.totalCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+        </mat-paginator> -->
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

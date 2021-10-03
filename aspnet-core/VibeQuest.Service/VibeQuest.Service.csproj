@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VibeQuest.DataAccess\VibeQuest.DataAccess.csproj" />
+    <ProjectReference Include="..\VibeQuest.Dto\VibeQuest.Dto.csproj" />
+    <ProjectReference Include="..\VibeQuest.Model\VibeQuest.Model.csproj" />
+    <ProjectReference Include="..\VibeQuest.Shared\VibeQuest.Shared.csproj" />
+    <ProjectReference Include="..\VibeQuest.Utility\VibeQuest.Utility.csproj" />
+  </ItemGroup>
+
+</Project>

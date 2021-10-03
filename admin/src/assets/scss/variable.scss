@@ -1,0 +1,86 @@
+$font : 'Manrope', sans-serif;
+
+$border-color: #C2C7D4;
+$dark-text:#865cd0;
+$lite-text:#8f939b;
+
+$white-text:#ffffff;
+$blue-theme : #865cd0;
+
+
+$themes: (
+    "blue": (
+        primary:  $blue-theme,
+        textColor: #FFF,
+        secondary: #865cd0,
+        lite-button:#EFF0F4,
+        lite-button-hover:#E0E2EB,
+        border-color: #C2C7D4,
+        lite-border-color: #E5E5E5,
+        dark-text:#3C3C3C,
+        lite-text:#6B778C,
+        white-text:#ffffff,
+        btn-box-shadow:rgba(55, 137, 224, 0.5),
+                
+        lightBg :#F2F4F5,
+        rowHover :rgba(226, 232, 241, 0.22),
+        grid-border-color: #eef0f5,
+        
+        bodyBg: #FAFCFF,
+        gradientBg: linear-gradient(70.79deg, #1079DA 15.19%, #4d0fd1 75.96%),
+        liteGradientBg:linear-gradient(207.53deg, #E6D2FF 8.81%, #CAF5FF 99.84%),
+        
+        menuIconColor:#8DD6FF,
+        iconColor : #12165E,
+    )
+);
+
+/*
+ * Implementation of themes
+ */
+ @mixin themify($themes) {
+    @each $theme, $map in $themes {
+      .theme-#{$theme} & {
+        $theme-map: () !global;
+        @each $key, $submap in $map {
+          $value: map-get(map-get($themes, $theme), '#{$key}');
+          $theme-map: map-merge($theme-map, ($key: $value)) !global;
+        }
+        @content;
+        $theme-map: null !global;
+      }
+    }
+}
+@function themed($key) {
+    @return map-get($theme-map, $key);
+}
+
+// @include themify($themes) {
+//     background: themed('lite-button-hover') !important; 
+// }
+
+
+$danger : #cc3e3e; 
+
+/*|Status color code|*/
+ $active: #19ac67;
+ $darft: #8388af;
+ $open: #cc3e3e;
+
+
+.colorBox.blue{
+  background: $blue-theme;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

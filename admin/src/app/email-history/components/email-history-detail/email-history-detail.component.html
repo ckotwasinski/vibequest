@@ -1,0 +1,19 @@
+<div class="spinner-div" *ngIf="loading" >
+  <mat-progress-spinner mode="indeterminate" *ngIf="loading" class="spinner-div">
+  </mat-progress-spinner>
+</div>
+<div class="Main_Div">
+  <div class="Title_Div align-center justify-space-between pb30">
+    <h3 class="m0">View Mail - {{data.title}}</h3>
+    <div class="Right_Side-Div">
+    </div>
+  </div>
+  <div class="Form_Div">
+    <mat-dialog-content class="mat-typography">
+      <div [innerHtml]="data.content"></div>
+    </mat-dialog-content>
+  </div>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</div>

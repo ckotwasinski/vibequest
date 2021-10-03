@@ -1,0 +1,65 @@
+
+
+<div class="Main_Div">
+  <div class="Title_Div align-center justify-space-between pb30">
+    <h3 class="m0">Email History</h3>
+    <div class="Right_Side-Div align-center">
+      <div class="search-btn">
+        <mat-form-field>
+          
+          <input matInput (keyup)="applyFilter($event)" #input placeholder="search">
+          <div class="search-icon">
+            <mat-icon aria-hidden="false" aria-label="Example search icon">search</mat-icon>
+          </div>
+        </mat-form-field>
+      </div>
+      
+    </div>
+  </div>
+  <div class="Table_Div">
+   <div class="auto-div">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+        <ng-container matColumnDef="body">
+          <th mat-header-cell *matHeaderCellDef style="width:10%" class="text-center"> View </th>
+          <td style="width:10%" mat-cell *matCellDef="let row" class="text-center">
+              <a id="View" (click)="openDialog(row.body,row.name)" class="cursor">
+                <mat-icon id="View" aria-hidden="false" aria-label="view icon">remove_red_eye</mat-icon>
+              </a> 
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="Name" style="width:20%"> Name </th>
+          <td style="width:20%" mat-cell *matCellDef="let row"> {{row.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="toEmailAddress">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="ToEmailAddress" style="width:20%"> To </th>
+          <td style="width:20%" mat-cell *matCellDef="let row"> {{row.toEmailAddress}} </td>
+        </ng-container>
+        <ng-container matColumnDef="fromEmailAddress">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="FromEmailAddress" style="width:20%"> From </th>
+          <td style="width:20%" mat-cell *matCellDef="let row"> {{row.fromEmailAddress}} </td>
+        </ng-container>
+        <ng-container matColumnDef="subject">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="Subject" style="width:20%"> Subject </th>
+          <td style="width:20%" mat-cell *matCellDef="let row"> {{row.subject}} </td>
+        </ng-container>
+        <ng-container matColumnDef="sentOn">
+          <th mat-header-cell *matHeaderCellDef style="width:20%"> Sent on </th>
+          <td  mat-cell *matCellDef="let row"> {{row.sentOn| date:'medium'}} </td>
+        </ng-container>
+       
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <div class="spinner-div" *ngIf="loading" >
+        <mat-progress-spinner mode="indeterminate" *ngIf="loading" class="spinner-div">
+        </mat-progress-spinner>
+      </div>
+     
+    </div>
+   </div>
+    <mat-paginator [length]="this.totalCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+    </mat-paginator>
+  </div>
+</div>

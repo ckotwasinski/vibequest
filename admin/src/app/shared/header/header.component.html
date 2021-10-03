@@ -1,0 +1,27 @@
+<header class="align-center">
+    <div class="justify-space-between align-center width-100">
+        <div class="logo">
+            <img src="assets/logo-dark.svg" alt="" [routerLink]="['/home']">
+        </div>
+        <div class="align-center">
+           <div class="ProfileInfo">
+               <div class="profile-details align-center">
+                   <span>{{initial}}</span>
+                   <small>{{name}}</small>
+               </div>
+               <div class="logout-hover-div">
+                    <div class="LogoutDiv">
+                        <a (click)="logout()" class="fw-500 fs-16">                
+                            Logout
+                        </a>
+                    </div>
+               </div>
+           </div>
+           <!-- <div class="LogoutDiv">
+                <a (click)="logout()">                
+                    <small class="fw-500 fs-16">Logout</small>
+                </a>
+            </div> -->
+        </div>
+    </div>
+</header>

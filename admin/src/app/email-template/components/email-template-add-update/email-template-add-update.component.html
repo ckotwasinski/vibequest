@@ -1,0 +1,149 @@
+<div class="spinner-div" *ngIf="loading" >
+    <mat-progress-spinner mode="indeterminate" *ngIf="loading" class="spinner-div">
+    </mat-progress-spinner>
+  </div>
+  <div class="Main_Div" *ngIf="emailTemplateAddUpdateForm">
+    <div class="Title_Div align-center justify-space-between pb30">
+        <h3 class="m0">{{ (selectedEmailTemplate.id ? 'Edit' : 'Add New')}}</h3>
+        <div class="Right_Side-Div">
+        </div>
+    </div>
+    <div class="Form_Div">
+        <div *ngIf="emailTemplateAddUpdateForm" mat-dialog-content>
+            <form [formGroup]="emailTemplateAddUpdateForm" (ngSubmit)="saveRecord()">
+                <div class="commonRowBox flex-wrap align-center">
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="name">Name<span class="danger">*</span></label>
+                            <div class="formElement">
+                                <input type="text" id="name" class="form-control" formControlName="name"  maxlength="100"/>
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.name">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && emailTemplateAddUpdateForm.get('name').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="code">Code<span class="danger">*</span></label>
+                            <div class="formElement">
+                                <input type="text" id="templateCode"
+                                    [readonly]="selectedEmailTemplate.id ? true : false" class="form-control"
+                                    formControlName="templateCode" maxlength="50"/>
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.templateCode">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && emailTemplateAddUpdateForm.get('templateCode').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="code">Subject<span class="danger">*</span></label>
+                            <div class="formElement">
+                                <input type="text" id="subject" class="form-control" formControlName="subject" />
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.subject">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && emailTemplateAddUpdateForm.get('subject').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="code">To</label>
+                            <div class="formElement">
+                                <input type="text" id="to" class="form-control" formControlName="to" maxlength="100" />
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.to">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && emailTemplateAddUpdateForm.get('to').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="code">CC</label>
+                            <div class="formElement">
+                                <input type="text" id="cc" class="form-control" formControlName="cc"  maxlength="100"/>
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.cc">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && emailTemplateAddUpdateForm.get('cc').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="code">BCC</label>
+                            <div class="formElement">
+                                <input type="text" id="bcc" class="form-control" formControlName="bcc"  maxlength="100"/>
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.bcc">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && emailTemplateAddUpdateForm.get('bcc').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="isActive">Active</label>
+                            <div class="formElement">
+                                <div class="formElement">
+                                    <div class="custom_chkbox">
+                                        <mat-checkbox id="isActive" class="form-control example-margin" color="primary"
+                                            formControlName="isActive"></mat-checkbox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt10">
+                    <label for="code">Body<span class="danger">*</span></label>
+                    <ckeditor formControlName="body" class="form-control" id="body"></ckeditor>
+                    <div class="error-container">
+                        <ng-container *ngFor="let validation of validation_messages.body">
+                            <div class="error-message"
+                                *ngIf="isValidateError && emailTemplateAddUpdateForm.get('body').hasError(validation.type)">
+                                <span>{{ validation.message }}</span>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <mat-dialog-actions align="end" *ngIf="emailTemplateAddUpdateForm">
+        <button mat-button mat-dialog-close class="btn btn-light">Cancel</button>
+        <button mat-button type="button" class="btn" iconClass="fa fa-check" (click)="saveRecord()">
+            Save
+        </button>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,112 @@
+<div class="SideNav">
+    
+
+    <mat-sidenav-container class="">
+        <mat-sidenav #sidenav [(mode)]="over" [(opened)]="opened" class="bottom-to-top">
+            <div class="headDiv">
+                <div class="width-100">
+                    <div class="logo">
+                        <img src="assets/images/logo-dark.svg" alt="" [routerLink]="['/home']">
+                    </div>
+                    <div class="ProfileInfo align-center space-between">
+                        <div class="profile-details align-center">
+                            <!-- <span>{{initial}}</span> -->
+                            <small>{{name}}</small>
+                        </div>
+                        <a (click)="logout()" class="logoutDiv">                
+                             Logout
+                         </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <mat-accordion multi="true" [displayMode]="displayMode">
+                    <mat-expansion-panel class="no-shadow my-0" #emailManagement="matExpansionPanel" [expanded]="panelName == 'eventManagement'?true:false" (afterExpand)="afterExpand('eventManagement')" (afterCollapse)="afterCollapse('eventManagement')">
+                        <mat-expansion-panel-header fxLayout="row" [expandedHeight]="expandHeight"
+                            [collapsedHeight]="collapseHeight"
+                            *hasPermission="[policies.event, policies.eventCategory]; op 'OR'"> 
+                            <mat-panel-title >
+                                Event Management
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-nav-list class="ml-0" dense>
+                            <mat-list-item [routerLink]="['/identity-management/events']" [routerLinkActive]="['active']" *hasPermission="[policies.event]">
+                                Event
+                            </mat-list-item>
+                            <mat-list-item [routerLink]="['/identity-management/event-category']" [routerLinkActive]="['active']" *hasPermission="[policies.eventCategory]">
+                                Event category
+                            </mat-list-item>
+                        </mat-nav-list>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel class="no-shadow" #identityManagement="matExpansionPanel" [expanded]="panelName == 'identityManagement'?true:false" (afterExpand)="afterExpand('identityManagement')" (afterCollapse)="afterCollapse('identityManagement')">
+                        <mat-expansion-panel-header fxLayout="row" [expandedHeight]="expandHeight"
+                            [collapsedHeight]="collapseHeight"
+                            *hasPermission="[policies.role, policies.user]; op 'OR'"> 
+                            <mat-panel-title>
+                                Identity Management
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-nav-list class="ml-0" dense>
+                            <mat-list-item [routerLink]="['/identity-management/roles']" [routerLinkActive]="['active']" *hasPermission="[policies.role]">
+                                Roles
+                            </mat-list-item>
+                            <mat-list-item [routerLink]="['/identity-management/users']" [routerLinkActive]="['active']" *hasPermission="[policies.user]">
+                                Users
+                            </mat-list-item>
+                           
+                        </mat-nav-list>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel class="no-shadow my-0" #audit="matExpansionPanel" [expanded]="panelName == 'audit'?true:false" (afterExpand)="afterExpand('audit')" (afterCollapse)="afterCollapse('audit')">
+                        <mat-expansion-panel-header fxLayout="row" [expandedHeight]="expandHeight"
+                            [collapsedHeight]="collapseHeight" 
+                            *hasPermission="[policies.activityLog, policies.errorLog]; op 'OR'">
+                            <mat-panel-title>
+                                Audit
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-nav-list class="ml-0" dense>
+                            <mat-list-item [routerLink]="['/audit/activity']" [routerLinkActive]="['active']" *hasPermission="[policies.activityLog]">
+                                Activity log
+                            </mat-list-item>
+                            <mat-list-item [routerLink]="['/audit/error']" [routerLinkActive]="['active']" *hasPermission="[policies.errorLog]">
+                                Error log
+                            </mat-list-item>
+                        </mat-nav-list>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel class="no-shadow my-0" #emailManagement="matExpansionPanel" [expanded]="panelName == 'emailManagement'?true:false" (afterExpand)="afterExpand('emailManagement')" (afterCollapse)="afterCollapse('emailManagement')">
+                        <mat-expansion-panel-header fxLayout="row" [expandedHeight]="expandHeight"
+                            [collapsedHeight]="collapseHeight"
+                            *hasPermission="[policies.emailTemplate, policies.emailHistory]; op 'OR'">
+                            <mat-panel-title >
+                                Email Management
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-nav-list class="ml-0" dense>
+                            <mat-list-item [routerLink]="['/email-template/email-template']" [routerLinkActive]="['active']" *hasPermission="[policies.emailTemplate]">
+                                Email Template
+                            </mat-list-item>
+                            <mat-list-item [routerLink]="['/email-history/email-history']" [routerLinkActive]="['active']" *hasPermission="[policies.emailHistory]">
+                                Email History
+                            </mat-list-item>
+                        </mat-nav-list>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel class="no-shadow my-0" #commonLookup="matExpansionPanel" [expanded]="panelName == 'commonLookup'?true:false" (afterExpand)="afterExpand('commonLookup')" (afterCollapse)="afterCollapse('commonLookup')">
+                        <mat-expansion-panel-header fxLayout="row" [expandedHeight]="expandHeight"
+                            [collapsedHeight]="collapseHeight"
+                            *hasPermission="[policies.commonLookup]; op 'OR'"> 
+                            <mat-panel-title>
+                                Common Lookup
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-nav-list class="ml-0" dense>
+                            <mat-list-item [routerLink]="['/common-lookup']" [routerLinkActive]="['active']" *hasPermission="[policies.commonLookup]">
+                                Common Lookup
+                            </mat-list-item>
+                        </mat-nav-list>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </mat-sidenav>
+        <router-outlet></router-outlet>
+    </mat-sidenav-container>
+</div>

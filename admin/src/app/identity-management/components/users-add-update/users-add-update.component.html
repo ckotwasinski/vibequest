@@ -1,0 +1,144 @@
+<div class="spinner-div" *ngIf="loading" >
+    <mat-progress-spinner mode="indeterminate" *ngIf="loading" class="spinner-div">
+    </mat-progress-spinner>
+  </div>
+<div class="Main_Div" *ngIf="isVisible">
+    <div class="Title_Div align-center justify-space-between pb30">
+        <h3 class="m0">{{ (selectedUser.id ? 'Edit' : 'Add New')}} </h3>
+        <div class="Right_Side-Div">
+
+        </div>
+    </div>
+    <div class="Form_Div">
+        <div *ngIf="isVisible">
+            <form [formGroup]="userAddUpdateForm" (ngSubmit)="saveRecord()">
+                <div class="commonRowBox flex-wrap align-center">
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="name">Name<span class="danger">*</span></label>
+                            <div class="formElement">
+                                <input type="text" id="fullName" class="form-control" formControlName="fullName"
+                                    maxlength="100" />
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.fullName">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && userAddUpdateForm.get('fullName').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="code">Email<span class="danger">*</span></label>
+                            <div class="formElement">
+                                <input type="text" id="email" class="form-control" formControlName="email"
+                                    maxlength="150"  [readonly]="selectedUser.id ? true : false" />
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.email">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && userAddUpdateForm.get('email').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox" *ngIf="!isEdit">
+                        <div class="formBox">
+                            <label for="code">Password<span class="danger">*</span></label>
+                            <div class="formElement">
+                                <input type="password" id="password" class="form-control" formControlName="password" />
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.password">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && userAddUpdateForm.get('password').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="code">Role<span class="danger">*</span></label>
+                            <div class="formElement">
+                                <div class="custom-select-box">
+                                    <select id="roleCode" class="form-control" formControlName="roleCode">
+                                        <option value="">Select an Option</option>
+                                        <option *ngFor="let role of rolesDropdown" [value]="role.code">{{role.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.roleCode">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && userAddUpdateForm.get('roleCode').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="rowBox">
+                        <div class="formBox">
+                            <label for="volunteer">Volunteer</label>
+                            <div class="formElement">
+                                <div class="custom_chkbox">
+                                    <mat-checkbox id="volunteer" formControlName="volunteer" color="primary"
+                                        class="form-control example-margin"></mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="code">Profile Picture</label>
+                            <div class="formElement">
+                                <div class="UploadFile_div">
+                                    <div class="UploadFile_Box" *ngIf="isProfilePicControlVisible">
+                                        <div class="btn">Choose File</div>
+                                    </div>
+                                    <input class="chose-file" type="file" accept="image/*"
+                                        formControlName="profilePhoto" (change)="onSelectFile($event)"
+                                        *ngIf="isProfilePicControlVisible" />
+                                    <img [src]="this.selectedUser.profilePhotoFullPath" alt="" width="50" height="50"
+                                        *ngIf="!isProfilePicControlVisible" />
+                                    <span class="actionIcon deleteIcon cursor" (click)="deleteProfilePic()"
+                                        *ngIf="!isProfilePicControlVisible">
+                                        <mat-icon aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="isActive">Active</label>
+                            <div class="formElement">
+                                <div class="formElement">
+                                    <div class="custom_chkbox">
+                                        <mat-checkbox id="isActive" class="form-control example-margin" color="primary"
+                                            formControlName="isActive"></mat-checkbox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+   
+    <mat-dialog-actions align="end" *ngIf="isVisible">
+        <button mat-button mat-dialog-close class="btn btn-light">Cancel</button>
+        <button mat-button type="button" class="btn" iconClass="fa fa-check" (click)="saveRecord()">
+            Save
+        </button>
+    </mat-dialog-actions>
+</div>

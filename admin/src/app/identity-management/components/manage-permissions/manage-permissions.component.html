@@ -1,0 +1,63 @@
+<div class="spinner-div" *ngIf="loading">
+  <mat-progress-spinner mode="indeterminate" class="spinner-div">
+  </mat-progress-spinner>
+</div>
+<div *ngIf="groups?.length > 0" class="Main_Div">
+  <div class="Title_Div align-center justify-space-between pb30">
+    <h3 class="m0">Permissions - {{role?.name}}</h3>
+    <div class="Right_Side-Div">
+    </div>
+</div>
+<div mat-dialog-content>
+      <div class="align-center mb10">
+        <input
+        type="checkbox"
+        id="select-all-in-all-tabs"
+        name="select-all-in-all-tabs"
+        class="custom-control-input"
+        [(ngModel)]="selectAllTab"
+          (click)="onClickSelectAll()"
+      />
+        <label class="custom-control-label" for="select-all-in-all-tabs">
+            Grant all permissions</label>
+      </div>
+
+        <div class="permission">
+            <mat-tab-group [@.disabled]="true">
+                <ng-container *ngFor="let group of groups">
+                     <mat-tab [label]="group?.displayName + '(' + data?.assignedCount +')'" *ngIf="{ assignedCount: getAssignedCount(group?.name) } as data">
+                        <div class="permission-module">
+                            <h4>{{ group?.displayName }}</h4>
+                            <div class="permission-div">
+                              <div class="align-center mb10">
+                                <input type="checkbox" id="selectGroup_{{group?.name}}"name="selectGroup_{{group.name}}"
+                                class="custom-control-input"
+                                [checked]="isSelectAllChecked(group?.permissions)"
+                                (click)="onClickSelectThisTab(group)"/>
+                                <label class="custom-control-label" for="selectGroup_{{group?.name}}">
+                                    Select All</label>
+                              </div>
+                              <div *ngFor=" let permission of group?.permissions;" 
+                              class="align-center mb10 {{permission?.parentName == null ? 'parent':'child'}}">
+                                <input #permissionCheckbox type="checkbox" [attr.id]="permission?.name"
+                                [checked]="permission?.isGranted" [value]="permission?.name"
+                                  class="custom-control-input"
+                                  (click)="onClickCheckbox(permission,group?.name,permissionCheckbox.value)"/>
+                                <label class="custom-control-label" [attr.for]="permission?.name">
+                                    {{ permission?.displayName }}
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                     </mat-tab>
+                </ng-container>
+              </mat-tab-group>
+        </div>
+        </div>
+        <mat-dialog-actions align="end">
+          <button mat-button mat-dialog-close class="btn btn-light">Cancel</button>
+          <button mat-button type="button" class="btn {{isEquivalent() == true ? 'btn-disable' : ''}}" iconClass="fa fa-check" (click)="submit()">
+              Save
+          </button>
+      </mat-dialog-actions>
+</div>

@@ -1,0 +1,168 @@
+@mixin statusBtnColor($colors...) {
+  @each $i in $colors {
+    .status.#{nth($i, 1)}{
+      background: nth($i, 2);
+    }
+  }
+}
+@include statusBtnColor(
+  'active' $active,
+  'draft'  $darft,
+  //'open'   $open,
+  //'closed' $darft,
+  'inactive'$darft,
+);
+
+
+@mixin statusColor($colors...) {
+	@each $i in $colors {
+		.status.#{nth($i, 1)} {
+      //color: nth($i, 2) !important;
+      color: darken(nth($i, 2), 15%)!important;
+      background:rgba(nth($i, 2), 0.20);
+    }
+    .dash.#{nth($i, 1)} {
+      //color: nth($i, 2) !important;
+      //color: darken(nth($i, 2), 10%)!important;
+      background:nth($i, 2) !important;
+		}
+	}
+}
+@include statusColor(
+  'draft'       #707070,
+  'active'      #1FA032,
+  'inactive'    #707070,
+  'pending'     #CCA91B,
+  'approved'    #1FA032,
+  'disapproved' #E30E47,
+  'failed'      #E30E47,
+  'completed'   #1FA032,
+  'pendingscheduled' #CCA91B,
+  'disconnected'    #707070,
+  'suspended'  #db9223,
+  'activated'  #1b85cc,
+  'reserved'   #1FA032,
+
+  'unassigned'  #CCA91B,
+  'assignedtoacustomer' #1FA032,
+  'disconnectedandavailabletobereleasedtothepool'  #1b85cc,
+
+  'open' #E30E47,
+  'closed' #707070,
+  'inprogress' #1b85cc,
+
+
+  'instock' #1FA032,
+  'assigned' #1b85cc,
+  'beingrepaired' #db9223,
+  'lost' #E30E47,
+
+  'schedulepending' #db9223,
+
+);
+
+// Custome Spacing //
+@mixin spacing_factory ($start,$number,$end) {
+  @for $i from 0 to $end {
+    .m#{$number * $i + $start}{ margin: ($number  * $i) + px !important }
+    .mt#{$number * $i + $start}{ margin-top: ($number  * $i) + px !important }
+    .mb#{$number * $i + $start}{ margin-bottom: ($number  * $i) + px !important }
+    .ml#{$number * $i + $start}{ margin-left: ($number  * $i) + px !important }
+    .mr#{$number * $i + $start}{ margin-right: ($number  * $i) + px !important }
+
+    .p#{$number * $i + $start} { padding: ($number  * $i) + px !important }
+    .pt#{$number * $i + $start}{ padding-top: ($number  * $i) + px !important }
+    .pb#{$number * $i + $start}{ padding-bottom: ($number  * $i) + px !important }
+    .pl#{$number * $i + $start}{ padding-left: ($number  * $i) + px !important }
+    .pr#{$number * $i + $start}{ padding-right: ($number  * $i) + px !important }
+
+    @include md{
+      body .sm-m#{$number * $i + $start}{ margin: ($number  * $i) + px !important }
+      body .md-mt#{$number * $i + $start}{ margin-top: ($number  * $i) + px !important }
+      body .md-mb#{$number * $i + $start}{ margin-bottom: ($number  * $i) + px !important }
+      body .md-ml#{$number * $i + $start}{ margin-left: ($number  * $i) + px !important }
+      body .md-mr#{$number * $i + $start}{ margin-right: ($number  * $i) + px !important }
+
+      body .md-p#{$number * $i + $start} { padding: ($number  * $i) + px !important }
+      body .md-pt#{$number * $i + $start}{ padding-top: ($number  * $i) + px !important }
+      body .md-pb#{$number * $i + $start}{ padding-bottom: ($number  * $i) + px !important }
+      body .md-pl#{$number * $i + $start}{ padding-left: ($number  * $i) + px !important }
+      body .md-pr#{$number * $i + $start}{ padding-right: ($number  * $i) + px !important }  
+    }
+    @include sm{
+      body .sm-m#{$number * $i + $start}{ margin: ($number  * $i) + px !important }
+      body .sm-mt#{$number * $i + $start}{ margin-top: ($number  * $i) + px !important }
+      body .sm-mb#{$number * $i + $start}{ margin-bottom: ($number  * $i) + px !important }
+      body .sm-ml#{$number * $i + $start}{ margin-left: ($number  * $i) + px !important }
+      body .sm-mr#{$number * $i + $start}{ margin-right: ($number  * $i) + px !important }
+
+      body .sm-p#{$number * $i + $start} { padding: ($number  * $i) + px !important }
+      body .sm-pt#{$number * $i + $start}{ padding-top: ($number  * $i) + px !important }
+      body .sm-pb#{$number * $i + $start}{ padding-bottom: ($number  * $i) + px !important }
+      body .sm-pl#{$number * $i + $start}{ padding-left: ($number  * $i) + px !important }
+      body .sm-pr#{$number * $i + $start}{ padding-right: ($number  * $i) + px !important }  
+    }
+
+    @include xs{
+      body .xs-m#{$number * $i + $start}{ margin: ($number  * $i) + px !important }
+      body .xs-mt#{$number * $i + $start}{ margin-top: ($number  * $i) + px !important }
+      body .xs-mb#{$number * $i + $start}{ margin-bottom: ($number  * $i) + px !important }
+      body .xs-ml#{$number * $i + $start}{ margin-left: ($number  * $i) + px !important }
+      body .xs-mr#{$number * $i + $start}{ margin-right: ($number  * $i) + px !important }
+
+      body .xs-p#{$number * $i + $start} { padding: ($number  * $i) + px !important }
+      body .xs-pt#{$number * $i + $start}{ padding-top: ($number  * $i) + px !important }
+      body .xs-pb#{$number * $i + $start}{ padding-bottom: ($number  * $i) + px !important }
+      body .xs-pl#{$number * $i + $start}{ padding-left: ($number  * $i) + px !important }
+      body .xs-pr#{$number * $i + $start}{ padding-right: ($number  * $i) + px !important }  
+    }
+  }
+}
+@include spacing_factory (0,5,80);
+// END Custome Spacing  -----------------------------//
+
+
+
+
+/***|Loader css landing page |***/
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.lds-ripple {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-ripple div {
+    position: absolute;
+    border: 4px solid #172B4D;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+  .lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+  }
+  @keyframes lds-ripple {
+    0% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      top: 0px;
+      left: 0px;
+      width: 72px;
+      height: 72px;
+      opacity: 0;
+    }
+}
+  
+
+

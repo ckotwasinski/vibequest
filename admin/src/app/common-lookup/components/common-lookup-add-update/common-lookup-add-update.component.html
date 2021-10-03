@@ -1,0 +1,114 @@
+<div class="spinner-div" *ngIf="loading" >
+    <mat-progress-spinner mode="indeterminate" *ngIf="loading" class="spinner-div">
+    </mat-progress-spinner>
+  </div>
+
+<div class="Main_Div">
+    <div class="Title_Div align-center justify-space-between pb30">
+        <h3 class="m0">{{ (selectedCommonLookup.id ? 'Edit' : 'Add New')}}</h3>
+        <div class="Right_Side-Div">
+        </div>
+    </div>
+    <div class="Form_Div">
+        <div *ngIf="selectedCommonLookup" mat-dialog-content>
+            <form [formGroup]="commonLookupForm" >
+                <div class="commonRowBox flex-wrap align-center">
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="configName"> Config Name <span class="danger"> * </span></label>
+                            <div class="formElement">
+                                <input type="text" id="configName" class="form-control" formControlName="configName"
+                                    autofocus maxlength="100"/>
+                                    <div class="error-container">
+                                        <ng-container *ngFor="let validation of validation_messages.configName">
+                                            <div class="error-message"
+                                                *ngIf="isValidateError && commonLookupForm.get('configName').hasError(validation.type)">
+                                                <span>{{ validation.message }}</span>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="configKey"> Config Key<span class="danger"> * </span></label>
+                            <div class="formElement">
+                                <input type="text" id="configKey" class="form-control" formControlName="configKey"  maxlength="100" />
+                                <div class="error-container">
+                                    <ng-container *ngFor="let validation of validation_messages.configKey">
+                                        <div class="error-message"
+                                            *ngIf="isValidateError && commonLookupForm.get('configKey').hasError(validation.type)">
+                                            <span>{{ validation.message }}</span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="configValue"> Config Value<span class="danger"> * </span></label>
+                            <div class="formElement">
+                                <input type="text" id="configValue" class="form-control"
+                                    formControlName="configValue"  maxlength="100" />
+                                    <div class="error-container">
+                                        <ng-container *ngFor="let validation of validation_messages.configValue">
+                                            <div class="error-message"
+                                                *ngIf="isValidateError && commonLookupForm.get('configValue').hasError(validation.type)">
+                                                <span>{{ validation.message }}</span>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="displayOrder"> Display Order <span class="danger"> * </span></label>
+                            <div class="formElement">
+                                <input type="text" id="displayOrder" class="form-control"
+                                    formControlName="displayOrder" />
+                                    <div class="error-container">
+                                        <ng-container *ngFor="let validation of validation_messages.displayOrder">
+                                            <div class="error-message"
+                                                *ngIf="isValidateError && commonLookupForm.get('displayOrder').hasError(validation.type)">
+                                                <span>{{ validation.message }}</span>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label for="description"> Description </label>
+                            <div class="formElement">
+                                <input type="text" id="description" class="form-control"
+                                    formControlName="description" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rowBox">
+                        <div class="formBox">
+                            <label>Active</label>
+                            <div class="formElement">
+                                <div class="custom_chkbox">                                
+                                    <mat-checkbox id="volunteer" formControlName="isActive" color="primary" 
+                                    class="form-control example-margin"></mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close class="btn btn-light">Cancel</button>
+    <button mat-button type="button" class="btn" iconClass="fa fa-check" (click)="saveRecord()">
+        Save
+    </button>
+</mat-dialog-actions>

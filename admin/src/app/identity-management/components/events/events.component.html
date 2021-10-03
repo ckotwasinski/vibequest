@@ -1,0 +1,81 @@
+
+  <div class="Main_Div">
+    <div class="Title_Div align-center justify-space-between pb30">
+        <h3 class="m0">Events</h3>
+        <div class="Right_Side-Div align-center">
+          <div class="search-btn">
+            <mat-form-field>
+              
+              <input matInput (keyup)="applyFilter($event)" #input placeholder="search">
+              <div class="search-icon">
+                <mat-icon aria-hidden="false" aria-label="Example search icon">search</mat-icon>
+              </div>
+            </mat-form-field>
+          </div>
+         
+        </div>
+    </div>
+    <div class="Table_Div">
+      <div class="auto-div">
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+            <ng-container matColumnDef="userFullName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="UserFullName" style= "width:10%"> User Name </th>
+              <td style= "width:20%" mat-cell *matCellDef="let row"> {{row.userFullName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="name" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="Name" style= "width:20%"> Name/Location </th>
+              <td  style= "width:5%" mat-cell *matCellDef="let row"> <label>{{row.name}}</label>  <p> {{row.location}} </p></td>
+            </ng-container>
+            <!-- <ng-container matColumnDef="location">
+              <th mat-header-cell *matHeaderCellDef style= "width:30%"> Location </th>
+              <td style= "width:30%" mat-cell *matCellDef="let row"> 
+              
+              </td>
+            </ng-container> -->
+            <ng-container matColumnDef="userEmail">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="UserEmail" style= "width:10%"> Email </th>
+              <td style= "width:20%" mat-cell *matCellDef="let row"> {{row.userEmail}} </td>
+            </ng-container>
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="Date" style= "width:20%"> Date </th>
+              <td style= "width:20%" mat-cell *matCellDef="let row"> {{row.date| date:'mediumDate'}} </td>
+            </ng-container> 
+            <ng-container matColumnDef="eventType">
+                <th mat-header-cell *matHeaderCellDef style= "width:10%"> EventType </th>
+                <td style= "width:15%" mat-cell *matCellDef="let row"> <div [class]="row.eventType == 'Private'?'statusDiv private':'statusDiv'"><span>{{row.eventType}}</span></div> </td>
+              </ng-container> 
+            <!-- <ng-container matColumnDef="createdDate">
+              <th mat-header-cell *matHeaderCellDef style="width:20%" class="text-center"> Images </th>
+              <td style="width:20%" mat-cell *matCellDef="let row" class="text-center"> 
+                <a id="View" [routerLink]="['/fish-species-images',row.id]" class="cursor">
+                  <mat-icon id="View" aria-hidden="false" aria-label="view icon">collections</mat-icon>
+                </a> </td>
+            </ng-container> -->
+           
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef style= "width:40%" class="pl15"> Action </th>
+              <td style= "width:40%" mat-cell *matCellDef="let row"> 
+            <a id="Delete" (click)="deleteRecord(row.id)" class="cursor">
+              <mat-icon id="Delete" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+            </a> 
+            </td>
+          </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> 
+          </table>  
+          <div class="spinner-div" *ngIf="loading" >
+            <mat-progress-spinner mode="indeterminate" *ngIf="loading" class="spinner-div">
+            </mat-progress-spinner>
+          </div>
+         
+        </div>
+      </div>
+      <mat-paginator 
+      [length]="this.totalCount"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      ></mat-paginator>
+    </div>
+</div>

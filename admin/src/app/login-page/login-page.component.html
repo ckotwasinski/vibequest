@@ -1,0 +1,53 @@
+<div class="accountPages">
+
+    <div class="loginBg">  
+  
+    </div>
+  
+    <div class="accountFrom">
+       <div class="loginDetailsDiv">
+        <div class="logo_div mb10">
+          <img src="assets/images/logo-dark.svg" alt="">
+       </div>
+       <form [formGroup]="form" (ngSubmit)="onSubmit()" validateOnSubmit >
+         <div class="form-group">
+           <label for="login-input-user-name-or-email-address">
+             Email 
+           </label>
+           <input class="form-control" type="text" id="login-input-user-name-or-email-address" formControlName="email"
+             autocomplete="email" autofocus />
+             <div class="error-container">
+               <ng-container *ngFor="let validation of validation_messages.email">
+                   <div class="error-message"
+                       *ngIf="isValidateError && form.get('email').hasError(validation.type)">
+                       <mat-icon>error</mat-icon>
+                       <span>{{ validation.message }}</span>
+                   </div>
+               </ng-container>
+           </div>
+         </div>
+         <div class="form-group">
+           <label for="login-input-password">
+               Password
+             </label>
+           <input class="form-control" type="password" id="login-input-password" formControlName="password"
+             autocomplete="current-password" />
+             <div class="error-container">
+               <ng-container *ngFor="let validation of validation_messages.password">
+                   <div class="error-message"
+                       *ngIf="isValidateError && form.get('password').hasError(validation.type)">
+                       <mat-icon>error</mat-icon>
+                       <span>{{ validation.message }}</span>
+                   </div>
+               </ng-container>
+           </div>
+         </div>
+         <div class="mt20 space-between">
+           <button class="btn pl30 pr30" mat-raised-button>LOGIN</button>
+           
+         </div>
+       </form>
+       </div>
+    </div>
+  </div>
+  
